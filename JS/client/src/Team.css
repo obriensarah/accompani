@@ -1,0 +1,62 @@
+.container{
+  margin: 20px;
+  height: 230px;
+  width: 200px;
+  overflow: hidden;
+  position: relative;
+  display: inline-block;
+  transition: all .5s;
+  vertical-align: middle;
+}
+
+.container:hover{
+  background: transparent;
+  transform: scale(1.1);
+  height: 320px;
+  margin: 0px 40px;
+}
+
+.colorbg{
+  height: 200px;
+  width: 200px;
+  border-radius: 50%;
+  background: #B80F42;
+  z-index: 990;
+}
+
+.profimg{
+  height: 200px;
+  border-radius: 50%;
+  filter: grayscale(100%);
+  opacity: .4;
+  z-index: 999;
+}
+
+.profimg:hover{
+  filter: grayscale(0%);
+  opacity: 1;
+}
+
+.name{
+  color: white;
+  font-weight: 100;
+}
+
+.description{
+  color: white;
+  font-weight: 400;
+  font-size: .5em;
+  margin-top: 20px;
+}
+
+.description a{
+  color: #42d7f4;
+  text-decoration: none;
+  cursor: pointer;
+  margin: 10px;
+  transition: all .2s;
+}
+
+.description a:hover{
+  font-size: 1.1em;
+}
