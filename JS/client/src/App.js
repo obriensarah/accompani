@@ -44,7 +44,7 @@ class App extends Component {
 
   renderSampleMidiBox(){
     return(
-      <a href='http://54.197.199.36:8000/sampledownload'>
+      <a href='http://35.174.137.122:8000/sampledownload'>
       {/* <a href='http://localhost:8000/sampledownload'> */}
         <div className='lightbox'>
           Download a Sample MIDI File for Testing!
@@ -128,7 +128,7 @@ class App extends Component {
             </div>
 
             <div className='cardContainer'>
-              <a href='http://54.197.199.36:8000/download'>
+              <a href='http://35.174.137.122:8000/download'>
               {/* <a href='http://localhost:8000/download'> */}
                 <button className='buttonPrimary'>DOWNLOAD XML FILES</button>
               </a>
