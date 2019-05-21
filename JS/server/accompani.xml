@@ -210,7 +210,7 @@
     </measure>
     
     <measure number="3" width="163">
-      <harmony><root><root-step>C</root-step></root><kind text="maj">major</kind></harmony><note default-x="16">
+      <harmony><root><root-step>A</root-step></root><kind text="min">minor</kind></harmony><note default-x="16">
         <pitch>
           <step>C</step>
           <octave>4</octave>
@@ -221,7 +221,7 @@
         <dot />
         <stem default-y="-14.5">up</stem>
       </note>
-      <harmony><root><root-step>G</root-step></root><kind text="maj">major</kind></harmony><note default-x="64">
+      <harmony><root><root-step>D</root-step></root><kind text="min">minor</kind></harmony><note default-x="64">
         <pitch>
           <step>D</step>
           <octave>4</octave>

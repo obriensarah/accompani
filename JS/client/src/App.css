@@ -209,16 +209,35 @@ input{
   cursor: pointer;
 }
 
+.buttonSmall{
+  transform: scale(.7);
+  margin: 2px;
+  position: relative;
+  display: inline-block;
+  vertical-align: 10%;
+}
+
+.buttonSelected{
+  background: #B80F42;
+  color: rgb(255, 204, 219);
+}
+
+.buttonUnselected{
+  background: #bbb;
+}
+
 .pianoContainer{
   display: inline-block;
   position: relative;
-  width: 283px;
+  width: 278px;
   height: 100px;
   margin: 10px auto;
   overflow: hidden;
   border-radius: 10px;
   border: 1px solid #B80F42;
   margin: 10px;
+  text-align: left;
+  white-space: nowrap;
 }
 
 .whiteKey{
@@ -226,10 +245,15 @@ input{
   display: inline-block;
   background-color: white;
   border-right: 1px solid #ccc;
-  width: 40px;
+  width: 39px;
   height: 100px;
   margin: 0;
   padding: 0;
+  line-height: 175px;
+  text-align: center;
+  font-size: 12pt;
+  color: #bbb;
+  font-weight: 100;
 }
 
 .selectedKey{
@@ -243,6 +267,11 @@ input{
   height: 60px;
   background: #B80F42;
   border-radius: 0px 0px 5px 5px;
+  line-height: 100px;
+  text-align: center;
+  font-size: 8pt;
+  color: rgb(255, 204, 219);
+  font-weight: 100;
 }
 
 #Db{
@@ -254,15 +283,19 @@ input{
 }
 
 #Gb{
-  left: 155px;
+  left: 150px;
 }
 
 #Ab{
-  left: 195px;
+  left: 190px;
 }
 
 #Bb{
-  left: 235px;
+  left: 230px;
+}
+
+#B{
+  border: 0px;
 }
 
 .lightbox{
@@ -290,4 +323,11 @@ input{
     opacity: 1;
     transform: translateX(0px);
   }
+}
+
+.menuText{
+  color: #B80F42;
+  font-size: 1.2em;
+  display: inline-block;
+  position: relative;
 }

@@ -5,16 +5,17 @@ module.exports = async function upload(req, res) {
   var form = new IncomingForm();
 
   form.on("file", async (field, file) => {
-    const key = file.name.substring(0,1)
-    const tonality = file.name.substring(1)
-    console.log('key is ', key, ' type is ', tonality)
+    const key = file.name.split('-')[0]
+    const tonality = file.name.split('-')[1]
+    const genre = file.name.split('-')[2]
+    console.log('key is ', key, ' type is ', tonality, 'genre is ', genre)
 
-    //change filename to input.xyml
+    //change filename to input.xml
     inputFile = 'input.xml'
     fs.copyFile(file.path,inputFile,console.log)
 
     console.log('running java on file ', inputFile)
-    var child = await require('child_process').spawn('python',['../../Python/accompani.py', inputFile, key, tonality]);
+    var child = await require('child_process').spawn('python',['../../Python/accompani.py', inputFile, key, tonality, genre]);
 
     child.stdout.on('data', (data) => {
       console.log(`child stdout:\n${data}`);

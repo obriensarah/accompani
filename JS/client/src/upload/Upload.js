@@ -10,7 +10,9 @@ class Upload extends Component {
       files: [],
       uploading: false,
       uploadProgress: {},
-      successfullUploaded: false
+      successfullUploaded: false,
+      tonality:'',
+      genre:''
     };
 
     this.onFilesAdded = this.onFilesAdded.bind(this);
@@ -76,11 +78,11 @@ class Upload extends Component {
       });
 
       const formData = new FormData();
-      let filename = this.state.key + 'major'
+      let filename = this.state.key + '-' + this.state.tonality + '-' + this.state.genre
       formData.append("file", file, filename);
 
-      req.open("POST", "http://35.174.137.122:8000/upload");
-      // req.open("POST", "http://localhost:8000/upload");
+      // req.open("POST", "http://35.174.137.122:8000/upload");
+      req.open("POST", "http://localhost:8000/upload");
       req.send(formData);
 
     });
@@ -140,45 +142,44 @@ class Upload extends Component {
     return this.state.key === key ? 'blackKey selectedKey' : 'blackKey'
   }
 
+  tonalityButtonStyle(tonality){
+    if (this.state.tonality === tonality.toLowerCase()){
+      return 'button buttonSmall buttonSelected'
+    }
+    return 'button buttonSmall buttonUnselected'
+  }
+
   renderPiano(){
     if (this.state.files.length > 0){
       return(
         <div style={{textAlign:'center'}}>
-          <div>Select a major key signature...&nbsp;<b style={{color: '#B80F42', fontSize:'1.2em'}}>{this.state.key}</b></div>
+          <div>Select a key signature...&nbsp;<b style={{color: '#B80F42', fontSize:'1.2em'}}>{this.state.key}</b></div>
           <div className='pianoContainer'>
-            <div className={this.keyStyle('C')} onClick={()=>this.selectKey('C')}></div>
-            <div className={this.keyStyle('D')} onClick={()=>this.selectKey('D')}></div>
-            <div className={this.keyStyle('E')} onClick={()=>this.selectKey('E')}></div>
-            <div className={this.keyStyle('F')} onClick={()=>this.selectKey('F')}></div>
-            <div className={this.keyStyle('G')} onClick={()=>this.selectKey('G')}></div>
-            <div className={this.keyStyle('A')} onClick={()=>this.selectKey('A')}></div>
-            <div className={this.keyStyle('B')} onClick={()=>this.selectKey('B')}></div>
+            <div className={this.keyStyle('C')} onClick={()=>this.selectKey('C')}>C</div>
+            <div className={this.keyStyle('D')} onClick={()=>this.selectKey('D')}>D</div>
+            <div className={this.keyStyle('E')} onClick={()=>this.selectKey('E')}>E</div>
+            <div className={this.keyStyle('F')} onClick={()=>this.selectKey('F')}>F</div>
+            <div className={this.keyStyle('G')} onClick={()=>this.selectKey('G')}>G</div>
+            <div className={this.keyStyle('A')} onClick={()=>this.selectKey('A')}>A</div>
+            <div className={this.keyStyle('B')} id='B' onClick={()=>this.selectKey('B')}>B</div>
 
-            <div className={this.keyStyle('Db')} id='Db' onClick={()=>this.selectKey('Db')}></div>
-            <div className={this.keyStyle('Eb')} id='Eb' onClick={()=>this.selectKey('Eb')}></div>
-            <div className={this.keyStyle('Gb')} id='Gb' onClick={()=>this.selectKey('Gb')}></div>
-            <div className={this.keyStyle('Ab')} id='Ab' onClick={()=>this.selectKey('Ab')}></div>
-            <div className={this.keyStyle('Bb')} id='Bb' onClick={()=>this.selectKey('Bb')}></div>
+            <div className={this.keyStyle('Db')} id='Db' onClick={()=>this.selectKey('Db')}>Db</div>
+            <div className={this.keyStyle('Eb')} id='Eb' onClick={()=>this.selectKey('Eb')}>Eb</div>
+            <div className={this.keyStyle('Gb')} id='Gb' onClick={()=>this.selectKey('Gb')}>Gb</div>
+            <div className={this.keyStyle('Ab')} id='Ab' onClick={()=>this.selectKey('Ab')}>Ab</div>
+            <div className={this.keyStyle('Bb')} id='Bb' onClick={()=>this.selectKey('Bb')}>Bb</div>
           </div>
+          <br/>
+          <button className={this.tonalityButtonStyle('Major')} onClick={()=>this.setState({tonality:'major'})}>Major</button>
+          <button className={this.tonalityButtonStyle('Minor')} onClick={()=>this.setState({tonality:'minor'})}>Minor</button>
           <br/>
           <div style={{display:'inline-block', verticalAlign:'top', margin:'20px',width: '40%'}}>Select a musical style...
             <br/>
-            <select>
+            <select value={this.state.genre} onChange={(e)=>this.setState({genre:e.target.value})}>
               <option value="Rock">Rock</option>
-              <option value="Jazz">Jazz</option>
               <option value="Pop">Pop</option>
-              <option value="Metal">Metal</option>
-              <option value="Classical">Classical</option>
+              <option value="Folk">Folk</option>
             </select>
-          </div>
-          <div style={{display:'inline-block', verticalAlign:'top', margin:'20px',width: '40%'}}>Included non-diatonic chords...
-            <br/>
-            <form style={{display:'inline-block', verticalAlign:'top', margin:'20px'}}>
-              <input type="checkbox" value="Bike"/> V7<br/>
-              <input type="checkbox" value="Car" /> V/V<br/>
-              <input type="checkbox" value="Car" /> II7<br/>
-              <input type="checkbox" value="Car" /> VII<br/>
-            </form>
           </div>
       </div>
       )
