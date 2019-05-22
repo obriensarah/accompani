@@ -3,11 +3,12 @@ import musthe as theory
 import random
 import xml.etree.ElementTree as ET
 import os,sys
+import dynamicMatrix
 
 major_chords = ['M', 'm', 'm', 'M', 'M', 'm', 'm']
 minor_chords = ['m', 'dim', 'M', 'm', 'M', 'M', 'M']
 
-matrix = {\
+'''matrix = {\
 1: [.5, 0, 0, .15, .35, 0, 0],\
 2: [.2, .5, 0, 0, .3, 0, 0],\
 3: [.4, 0, .5, 0, 0, .1, 0],\
@@ -15,7 +16,16 @@ matrix = {\
 5: [.4, 0, 0, .1, .5, 0, .0],\
 6: [0, .3, 0, 0, .2, .5, 0],\
 7: [.8, 0, 0, 0, .2, 0, 0]\
-}
+}'''
+matrix = {}
+
+def num_to_rn(num):
+	rns = [None, 'i', 'ii', 'iii', 'iv', 'v', 'vi', 'vii']
+	return rns[num]
+
+def rn_to_num(rn):
+	rns = [None, 'i', 'ii', 'iii', 'iv', 'v', 'vi', 'vii']
+	return rns.index(rn)
 
 def get_chord_in_scale(idx, key):
 
@@ -42,6 +52,9 @@ def get_scale_idx(note, key):
 	raise ValueError("note not in scale")
 
 def build_chord(num, key):
+
+	print "num is ", num
+	print "key is ", key
 
 	scale = theory.Scale(key[0], key[1])
 	letter = scale[num-1]
@@ -86,23 +99,26 @@ def get_next_chord(next_note, prev_chord, key):
 
 	prev_chord_num = get_scale_idx(prev_chord[0], key)
 
+	print 'prev_chord_num is ', prev_chord_num
+
 	options = get_chord_options(next_note, key)
+	options = [num_to_rn(option) for option in options]
 	print "options are ", options
 
 	rand = random.seed()
 	r = random.randint(1, 100) / float(100)
 
 	if key[1] == 'major':
-		probs = matrix[prev_chord_num]
-		print "probs are ", probs
+		probs = matrix[num_to_rn(prev_chord_num)]
+		#print "probs are ", probs
 	if key[1] == 'harmonic_minor':
-		probs = matrix[prev_chord_num]
-
+		probs = matrix[num_to_rn(prev_chord_num)]
+	print "probs are ", probs
 	options_probs = []
-	for i in range(7):
-		if i+1 in options:
-			prob = probs[i]
-			options_probs.append(prob)
+	#for i in range(7):
+	for prob in probs:
+		if prob in options:
+			options_probs.append(probs[prob])
 
 	s = sum(options_probs)
 	normalized = [prob/s for prob in options_probs]
@@ -117,7 +133,7 @@ def get_next_chord(next_note, prev_chord, key):
 			break
 		total += normalized[i]
 
-	return build_chord(options[index], key)
+	return build_chord(rn_to_num(options[index]), key)
 
 def get_all_chords(notes, key):
 	first_note = notes[0]
@@ -162,9 +178,10 @@ def main():
 
 	path = sys.argv[1]
 	key_name = sys.argv[2]
-	# key_name = 'C'
 	key_tonality = sys.argv[3]
-	# key_tonality = 'major'
+	genre = sys.argv[4]
+	global matrix
+	matrix = dynamicMatrix.build_matrix(genre)
 	write_chords(get_all_chords(mxml.get_notes(path), (key_name, key_tonality)), path)
 
 main()

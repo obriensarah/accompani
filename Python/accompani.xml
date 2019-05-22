@@ -110,7 +110,7 @@
         <dot />
         <stem default-y="-14.5">up</stem>
       </note>
-      <harmony><root><root-step>G</root-step></root><kind text="maj">major</kind></harmony><note default-x="133">
+      <harmony><root><root-step>B</root-step></root><kind text="min">minor</kind></harmony><note default-x="133">
         <pitch>
           <step>D</step>
           <octave>4</octave>
@@ -120,7 +120,7 @@
         <type>eighth</type>
         <stem default-y="-9.5">up</stem>
       </note>
-      <harmony><root><root-step>C</root-step></root><kind text="maj">major</kind></harmony><note default-x="161">
+      <harmony><root><root-step>A</root-step></root><kind text="min">minor</kind></harmony><note default-x="161">
         <pitch>
           <step>E</step>
           <octave>4</octave>
@@ -154,7 +154,7 @@
         <stem default-y="-10">up</stem>
         <beam number="1">begin</beam>
       </note>
-      <harmony><root><root-step>F</root-step></root><kind text="maj">major</kind></harmony><note default-x="36">
+      <harmony><root><root-step>C</root-step></root><kind text="maj">major</kind></harmony><note default-x="36">
         <pitch>
           <step>C</step>
           <octave>4</octave>
@@ -176,7 +176,7 @@
         <stem default-y="-8">up</stem>
         <beam number="1">continue</beam>
       </note>
-      <harmony><root><root-step>C</root-step></root><kind text="maj">major</kind></harmony><note default-x="79">
+      <harmony><root><root-step>A</root-step></root><kind text="min">minor</kind></harmony><note default-x="79">
         <pitch>
           <step>E</step>
           <octave>4</octave>
@@ -197,7 +197,7 @@
         <type>quarter</type>
         <stem default-y="-14.5">up</stem>
       </note>
-      <harmony><root><root-step>G</root-step></root><kind text="maj">major</kind></harmony><note default-x="137">
+      <harmony><root><root-step>E</root-step></root><kind text="min">minor</kind></harmony><note default-x="137">
         <pitch>
           <step>G</step>
           <octave>3</octave>
@@ -221,7 +221,7 @@
         <dot />
         <stem default-y="-14.5">up</stem>
       </note>
-      <harmony><root><root-step>G</root-step></root><kind text="maj">major</kind></harmony><note default-x="64">
+      <harmony><root><root-step>B</root-step></root><kind text="min">minor</kind></harmony><note default-x="64">
         <pitch>
           <step>D</step>
           <octave>4</octave>
@@ -254,7 +254,7 @@
     </measure>
     
     <measure number="4" width="160">
-      <harmony><root><root-step>G</root-step></root><kind text="maj">major</kind></harmony><note default-x="13">
+      <harmony><root><root-step>B</root-step></root><kind text="min">minor</kind></harmony><note default-x="13">
         <pitch>
           <step>D</step>
           <octave>4</octave>
@@ -265,7 +265,7 @@
         <stem default-y="-10">up</stem>
         <beam number="1">begin</beam>
       </note>
-      <harmony><root><root-step>C</root-step></root><kind text="maj">major</kind></harmony><note default-x="35">
+      <harmony><root><root-step>F</root-step></root><kind text="maj">major</kind></harmony><note default-x="35">
         <pitch>
           <step>C</step>
           <octave>4</octave>
@@ -276,7 +276,7 @@
         <stem default-y="-9">up</stem>
         <beam number="1">continue</beam>
       </note>
-      <harmony><root><root-step>G</root-step></root><kind text="maj">major</kind></harmony><note default-x="58">
+      <harmony><root><root-step>B</root-step></root><kind text="min">minor</kind></harmony><note default-x="58">
         <pitch>
           <step>D</step>
           <octave>4</octave>
@@ -287,7 +287,7 @@
         <stem default-y="-8">up</stem>
         <beam number="1">continue</beam>
       </note>
-      <harmony><root><root-step>C</root-step></root><kind text="maj">major</kind></harmony><note default-x="79">
+      <harmony><root><root-step>A</root-step></root><kind text="min">minor</kind></harmony><note default-x="79">
         <pitch>
           <step>E</step>
           <octave>4</octave>
@@ -298,7 +298,7 @@
         <stem default-y="-7.5">up</stem>
         <beam number="1">end</beam>
       </note>
-      <harmony><root><root-step>C</root-step></root><kind text="maj">major</kind></harmony><note default-x="101">
+      <harmony><root><root-step>F</root-step></root><kind text="maj">major</kind></harmony><note default-x="101">
         <pitch>
           <step>C</step>
           <octave>4</octave>

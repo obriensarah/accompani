@@ -3,12 +3,12 @@ import os,sys, re, operator
 def sortKeyScores(keyScores): 
     return [score for score in reversed(keyScores)] 
 
-def parseChordpro(filename):
-    title = filename.split('.')[0]
-    print title
+def parseChordpro(filepath):
+    title = filepath.split('.')[0]
+    # print title
     #key = open('./chordpro/d/Bob.Dylan/' + filename).readline().split(' ')[1].split('}')[0]
     key = '?'
-    text = open('./chordpro/d/Bob.Dylan/' + filename).read()
+    text = open(filepath).read()
     chords = text.split('[')[1:]
     for i in range(len(chords)):
         chords[i] = chords[i].split(']')[0]

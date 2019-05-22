@@ -10,6 +10,7 @@ def parseChordpro(path):
     chords = text.split('[')[1:]
     for i in range(len(chords)):
         chords[i] = chords[i].split(']')[0]
+        chords[i] = chords[i].capitalize()
     return title, key, chords
 
 def calculateKeyScores(chords):
@@ -155,61 +156,18 @@ def relative_minor(key):
     relative = ["C", "Db", "D", "Eb", "E", "F", "Gb", "G", "Ab", "A", "Bb", "B"]
 
 
-def main():
+def detectKey(filepath):
 
-    # initialize accuracy counters
-    numSongs = 0
-    numCorrect = 0
-    numSongsMinor = 0
-    numCorrectMinor = 0
+    title, key, chordsInSong = parseChordpro(filepath)
 
-    # main method
-    for artist in os.listdir('./training_data'):
-        if artist == '.DS_Store':
-                continue
-        for filename in os.listdir('./training_data/' + artist):
-            if filename == '.DS_Store':
-                continue
-            fullpath = './training_data/' +  artist + '/' + filename
+    # calculate key scores
+    majorKeyScoresList, minorKeyScoresList, detectedMajorKey, detectedMinorKey = calculateKeyScores(chordsInSong)
 
-            # load song data
-            title, key, chordsInSong = parseChordpro(fullpath)
+    if majorKeyScoresList[0][1] >= minorKeyScoresList[0][1]:
+        winner = detectedMajorKey
+    else:
+        winner = detectedMinorKey
 
-            # #skip nonminor keys
-            # if key[-1] == 'm':
-            #     continue
+    return winner
 
-            # increment accuracy counter
-            numSongs += 1
-
-            # calculate key scores
-            majorKeyScoresList, minorKeyScoresList, detectedMajorKey, detectedMinorKey = calculateKeyScores(chordsInSong)
-
-                # increment accuracy counter if correct
-            '''if key == detectedMajorKey:
-                printResults(title,key,detectedMajorKey,majorKeyScoresList,detectedMinorKey,minorKeyScoresList,chordsInSong)
-                numCorrect += 1
-            elif key == detectedMinorKey:
-                printResults(title,key,detectedMajorKey,majorKeyScoresList,detectedMinorKey,minorKeyScoresList,chordsInSong)
-                numCorrect += 1'''
-            #else:
-
-            if majorKeyScoresList[0][1] >= minorKeyScoresList[0][1]:
-                winner = detectedMajorKey
-            else:
-                winner = detectedMinorKey
-
-            if 'm' in key:
-                numSongsMinor += 1
-
-            if key == winner:
-                numCorrect += 1
-                if 'm' in key:
-                    numCorrectMinor += 1 
-            else:
-                printResults(title,key,detectedMajorKey,majorKeyScoresList,detectedMinorKey,minorKeyScoresList,chordsInSong)
-                
-
-    printAccuracy(numSongs,numCorrect, numSongsMinor, numCorrectMinor)
-
-main()
+#print detectKey('../training_data/genres/Rock/Beatles_74/AcrossTheUniverse.chopro')

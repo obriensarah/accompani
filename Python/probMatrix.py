@@ -1,37 +1,51 @@
 import os,sys
 import transpose
 import rna
-import detectKey
+#import detectKey
 import keyDetection
+import warnings
 
 #endings = ['7', '9', 'sus4', '7+', '6', '7add9','7sus', 'sus', '+7', '7(V)','7/4']
 
 probabilities = {}
 
-def transposeChords(filename):
-	keyVals = ['C','Db','D','Eb','E','F','Gb','G','Ab','A','Bb','B']
-	title = filename.split('.')[0]
-	key = detectKey.detectKey(filename)
+def transposeChords(filepath):
+	keyVals_flat = ['C','Db','D','Eb','E','F','Gb','G','Ab','A','Bb','B']
+	keyVals_sharp = ['C','C#','D','D#','E','F','F#','G','G#','A','A#','B']
+	key = keyDetection.detectKey(filepath)
 
-	chords = open('./chordpro/d/Bob.Dylan/' + filename).read().split('[')[1:]
-
-	#key = keyDetection.calculateKeyScores(chords)[1]
-	keyVal = keyVals.index(key)
+	chords = open(filepath).read().split('[')[1:]
 
 	for i in range(len(chords)):
 		chords[i] = chords[i].split(']')[0].split('/')[0]
+		chords[i] = chords[i].capitalize()
+
+	key = keyDetection.detectKey(filepath)
+
+	if 'm' in key:
+		key = key[0:-1]
+
+	if key in keyVals_flat:
+		keyVal = keyVals_flat.index(key)
+	else:
+		keyVal = keyVals_sharp.index(key)
 
 	for i in range(len(chords)):
 		curRoot, accidental = getChordVal(chords[i])
 		if curRoot == -1:
-		    raise Warning('Non-transposable chord detected in ' + title)
+		    # raise Warning('Non-transposable chord detected in ' + filepath)
+		    warnings.warn('Non-transposable chord detected in ' + filepath + ': ' + chords[i])
 		    continue
 		newRoot = curRoot - keyVal
 		if newRoot < 0:
 		    newRoot += 12
 		if accidental:
-		    chords[i] = keyVals[newRoot] + chords[i][2:]
-		    chords[i] = keyVals[newRoot] + chords[i][1:]
+			if key in keyVals_flat:
+				chords[i] = keyVals_flat[newRoot] + chords[i][2:]
+				chords[i] = keyVals_flat[newRoot] + chords[i][1:]
+			else:
+				chords[i] = keyVals_sharp[newRoot] + chords[i][2:]
+				chords[i] = keyVals_sharp[newRoot] + chords[i][1:]
 
 	#print 'Transposed Chords: '
 	#print chords, '\n\n\n\n\n'
@@ -120,7 +134,7 @@ def normalize(dictionary):
 			dictionary[key1][key2] /= float(total)
 	return dictionary
 
-def main():
+"""def main():
 	for filename in os.listdir('./chordpro/d/Bob.Dylan/'):
 	    title = filename.split('.')[0]
 
@@ -134,8 +148,8 @@ def main():
 	    rn = rna.c_to_rn(transposed)
 	    matrix = fill_matrix(rn)
 	    normalized = normalize(matrix)'''
-	return normalize(probabilities)
+	return normalize(probabilities)"""
 
 
 
-print main()
+#print main()
