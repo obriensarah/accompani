@@ -10,7 +10,7 @@ probabilities = {}
 
 
 def build_matrix(genre):
-	for dirname in os.listdir(os.path.join('../../training_data/genres', genre)):
+	for dirname in os.listdir(os.path.join('../training_data/genres', genre)):
 		if dirname != '.DS_Store':
 			for filename in os.listdir(os.path.join('../training_data/genres', genre, dirname)):
 				probabilities = probMatrix.fill_matrix(rna.c_to_rn(probMatrix.transposeChords(os.path.join('../training_data/genres', genre, dirname, filename))))
