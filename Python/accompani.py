@@ -56,10 +56,7 @@ def get_scale_idx(note, key):
 	raise ValueError("note ", note, " not in scale ", key)
 
 def build_chord(num, key):
-
-	print "num is ", num
-	print "key is ", key
-
+	print "\n\nBUILDING CHORD: ", num, " chord in ", key
 	scale = theory.Scale(key[0], key[1])
 	letter = scale[num-1]
 
@@ -69,8 +66,7 @@ def build_chord(num, key):
 	if key[1] == 'harmonic_minor':
 		ending = minor_chords[num-1]
 
-	print "letter is ", letter
-	print "ending is ", ending
+	print "\n Chord is ", letter, ending
 	return str(letter)+ending
 
 def get_chord_options(note, key):
@@ -87,7 +83,7 @@ def get_chord_options(note, key):
 		if options[i] <= 0:
 			options[i] += 7
 
-	print "chord options are ", sorted(options)
+	# print "chord options are ", sorted(options)
 	return sorted(options)
 
 def get_first_chord(first_note, key):
@@ -97,17 +93,17 @@ def get_first_chord(first_note, key):
 
 	return build_chord(options[0], key)
 
-#print get_first_chord('C', ('C', 'major'))
-
 def get_next_chord(next_note, prev_chord, key):
+
+	print '\n\n\nGETTING CHORD:\n'
+	print 'next_note: ', next_note
+	print 'prev_chord: ', prev_chord
 
 	prev_chord_num = get_scale_idx(prev_chord[0], key)
 
-	print 'prev_chord_num is ', prev_chord_num
-
 	options = get_chord_options(next_note, key)
 	options = [num_to_rn(option) for option in options]
-	print "options are ", options
+	print "\nOptions: ", options
 
 	rand = random.seed()
 	r = random.randint(1, 100) / float(100)
@@ -117,7 +113,7 @@ def get_next_chord(next_note, prev_chord, key):
 		#print "probs are ", probs
 	if key[1] == 'harmonic_minor':
 		probs = matrix[num_to_rn(prev_chord_num)]
-	print "probs are ", probs
+	print "\nProbabilities: ", probs
 	options_probs = []
 	#for i in range(7):
 	for prob in probs:
@@ -127,7 +123,7 @@ def get_next_chord(next_note, prev_chord, key):
 	s = sum(options_probs)
 	normalized = [prob/s for prob in options_probs]
 
-	print "normalized is ", normalized
+	print "\nNormalized Probabilities: ", normalized
 
 	total = 0
 	index = -1
@@ -189,5 +185,3 @@ def main():
 	write_chords(get_all_chords(mxml.get_notes(path), (key_name, key_tonality)), path)
 
 main()
-#print get_all_chords(['C','D', 'E', 'D', 'C'], ('C', 'major'))
-#write_chords(get_all_chords(mxml.get_notes('frenchsong.xml'), ('C', 'major')), 'frenchsong.xml')

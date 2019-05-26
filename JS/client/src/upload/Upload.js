@@ -12,7 +12,7 @@ class Upload extends Component {
       uploadProgress: {},
       successfullUploaded: false,
       tonality:'',
-      genre:''
+      genre:'Rock'
     };
 
     this.onFilesAdded = this.onFilesAdded.bind(this);
