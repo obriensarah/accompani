@@ -42,6 +42,9 @@ def add_chord(chord_name, chord_ending, measure_index, note_index, tree):
 
 	tree.write('accompani.xml')
 
+def add_header(tree):
+	root = tree.getroot()
+
 def add_many_chords(chord_name, chord_ending, path):
 	tree = ET.parse(path)
 	root = tree.getroot()
