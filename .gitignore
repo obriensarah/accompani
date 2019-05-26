@@ -1,2 +1,5 @@
+*.pyc
+
 JS/server/node_modules/
+
 JS/client/node_modules/
