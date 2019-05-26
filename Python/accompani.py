@@ -5,8 +5,8 @@ import xml.etree.ElementTree as ET
 import os,sys
 import dynamicMatrix
 
-major_chords = ['M', 'm', 'm', 'M', 'M', 'm', 'm']
-minor_chords = ['m', 'dim', 'M', 'm', 'M', 'M', 'M']
+major_chords = ['M', 'm', 'm', 'M', 'M', 'm', 'dim']
+minor_chords = ['m', 'm', 'M', 'm', 'm', 'M', 'M']
 
 '''matrix = {\
 1: [.5, 0, 0, .15, .35, 0, 0],\
@@ -44,14 +44,14 @@ def get_chord_in_scale(idx, key):
 def get_scale_idx(note, key):
 
 	scale = theory.Scale(key[0], key[1])
-	print "key is ", key
-	print "scale is ", scale
-	print "note is ", note
+	# print "key is ", key
+	# print "scale is ", scale
+	# print "note is ", note
 
-	print "test is ", theory.Note(note)
+	# print "test is ", theory.Note(note)
 	for i in range(7):
 		print scale.__getitem__(i)
-		if scale.__getitem__(i).__eq__(theory.Note(note)):
+		if scale.__getitem__(i).letter.__eq__(theory.Note(note).letter):
 			return i + 1
 	raise ValueError("note ", note, " not in scale ", key)
 
