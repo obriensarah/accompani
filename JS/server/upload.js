@@ -15,7 +15,7 @@ module.exports = async function upload(req, res) {
     fs.copyFile(file.path,inputFile,console.log)
 
     console.log('running java on file ', inputFile)
-    var child = await require('child_process').spawn('python',['../../Python/accompani.py', inputFile, key, tonality, genre]);
+    var child = await require('child_process').spawn('python',['../Python/accompani.py', inputFile, key, tonality, genre]);
 
     child.stdout.on('data', (data) => {
       console.log(`child stdout:\n${data}`);
