@@ -81,8 +81,8 @@ class Upload extends Component {
       let filename = this.state.key + '-' + this.state.tonality + '-' + this.state.genre
       formData.append("file", file, filename);
 
-      // req.open("POST", "http://35.174.137.122:8000/upload");
-      req.open("POST", "http://localhost:8000/upload");
+      req.open("POST", "http://35.174.137.122:8000/upload");
+      // req.open("POST", "http://localhost:8000/upload");
       req.send(formData);
 
     });
