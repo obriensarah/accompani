@@ -161,6 +161,7 @@ def write_chords(all_chords, path):
 				print 'prev_chord: ', prev_chord
 				if curr_chord == prev_chord:
 					print "\n\nREPEATED CHORD DETECTED: skipping XML write.\n\n"
+					chord_counter += 1
 					continue
 
 				if 'M' in curr_chord:
