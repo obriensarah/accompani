@@ -218,7 +218,7 @@ def main():
 	rhythm = sys.argv[5]
 	global matrix
 	matrix = dynamicMatrix.build_matrix(genre)
-	if rhythm == 'single':
+	if rhythm == 'note':
 		write_chords_single(get_all_chords(mxml.get_notes_single(path, (key_name, key_tonality)), (key_name, key_tonality)), path)
 	else:
 		write_chords(get_all_chords(mxml.get_notes(path, (key_name, key_tonality)), (key_name, key_tonality)), path)

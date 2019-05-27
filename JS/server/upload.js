@@ -8,14 +8,15 @@ module.exports = async function upload(req, res) {
     const key = file.name.split('-')[0]
     const tonality = file.name.split('-')[1]
     const genre = file.name.split('-')[2]
-    console.log('key is ', key, ' type is ', tonality, 'genre is ', genre)
+    const rhythm = file.name.split('-')[3].toLowerCase()
+    console.log('key is ', key, ' type is ', tonality, 'genre is ', genre, 'rhythm is ', rhythm)
 
     //change filename to input.xml
     inputFile = 'input.xml'
     fs.copyFile(file.path,inputFile,console.log)
 
     console.log('running python on file ', inputFile)
-    var child = await require('child_process').spawn('python',['../Python/accompani.py', inputFile, key, tonality, genre]);
+    var child = await require('child_process').spawn('python',['../Python/accompani.py', inputFile, key, tonality, genre, rhythm]);
 
     child.stdout.on('data', (data) => {
       console.log(`child stdout:\n${data}`);
