@@ -111,10 +111,12 @@ def get_next_chord(next_note, prev_chord, key):
 	print "\nOptions: ", options
 
 	options_probs = []
-	#for i in range(7):
-	for prob in probs:
-		if prob in options:
-			options_probs.append(probs[prob])
+	# for prob in probs:
+	# 	if prob in options:
+	# 		options_probs.append(probs[prob])
+
+	for prob in options:
+		options_probs.append(probs[prob])
 
 	s = sum(options_probs)
 	normalized = [prob/s for prob in options_probs]
