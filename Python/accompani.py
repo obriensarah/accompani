@@ -162,6 +162,7 @@ def write_chords(all_chords, path):
 			curr_chord = all_chords[chord_counter]
 			if curr_chord == prev_chord:
 				chord_counter += 1
+				measure_counter += 1
 				print 'REPEATED CHORD DETECTED: skipping this write'
 				continue
 
