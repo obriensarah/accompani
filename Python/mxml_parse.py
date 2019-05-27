@@ -18,13 +18,13 @@ def get_notes(path, key):
 	all_notes = []
 
 	for measure in P1:
-		for note in measure.find('note'):
-			if note.find('accidental') is not None:
-				raise ValueError('\n\nWARNING: sorry mate, no notes outside the key signature for now. check back soon...\n\n')
-			elif note.find('pitch') is not None:
-				for i in range(7):
-					if scale[i].letter == note.find('pitch').find('step').text:
-						all_notes.append(str(scale[i].letter) + str(scale[i].accidental))
+		note = measure.find('note')
+		if note.find('accidental') is not None:
+			raise ValueError('\n\nWARNING: sorry mate, no notes outside the key signature for now. check back soon...\n\n')
+		elif note.find('pitch') is not None:
+			for i in range(7):
+				if scale[i].letter == note.find('pitch').find('step').text:
+					all_notes.append(str(scale[i].letter) + str(scale[i].accidental))
 
 	return all_notes
 

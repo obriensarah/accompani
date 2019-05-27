@@ -156,25 +156,25 @@ def write_chords(all_chords, path):
 	chord_counter = 0
 	measure_counter = 0 #to find measure index to feed to add_chord
 	for measure in P1.findall('measure'):
-		for note in measure.find('note'):
-			note_index = measure.getchildren().index(note)
-			if len(note.findall('pitch')) != 0:
-				curr_chord = all_chords[chord_counter]
-				if curr_chord == prev_chord:
-					chord_counter += 1
-					continue
-
-				if 'M' in curr_chord:
-					mxml.add_chord(curr_chord[0:-1], 'major', measure_counter, note_index, tree)
-
-				elif curr_chord.endswith('dim'):
-					mxml.add_chord(curr_chord[0:-3], 'diminished', measure_counter, note_index, tree)
-
-				elif curr_chord.endswith('m'):
-					mxml.add_chord(curr_chord[0:-1], 'minor', measure_counter, note_index, tree)
-				
-				prev_chord = curr_chord
+		note = measure.find('note')
+		note_index = measure.getchildren().index(note)
+		if len(note.findall('pitch')) != 0:
+			curr_chord = all_chords[chord_counter]
+			if curr_chord == prev_chord:
 				chord_counter += 1
+				continue
+
+			if 'M' in curr_chord:
+				mxml.add_chord(curr_chord[0:-1], 'major', measure_counter, note_index, tree)
+
+			elif curr_chord.endswith('dim'):
+				mxml.add_chord(curr_chord[0:-3], 'diminished', measure_counter, note_index, tree)
+
+			elif curr_chord.endswith('m'):
+				mxml.add_chord(curr_chord[0:-1], 'minor', measure_counter, note_index, tree)
+			
+			prev_chord = curr_chord
+			chord_counter += 1
 		measure_counter += 1
 
 def main():
