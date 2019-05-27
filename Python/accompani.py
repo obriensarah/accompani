@@ -45,7 +45,7 @@ def get_scale_idx(note, key):
 
 	scale = theory.Scale(key[0], key[1])
 	for i in range(7):
-		print scale.__getitem__(i)
+		# print scale.__getitem__(i)
 		if scale.__getitem__(i).letter.__eq__(theory.Note(note).letter):
 			return i + 1
 	raise ValueError("note ", note, " not in scale ", key)
@@ -61,7 +61,7 @@ def build_chord(num, key):
 	if key[1] == 'harmonic_minor':
 		ending = minor_chords[num-1]
 
-	print "\n Chord is ", letter, ending, '\n\n\n\n\n'
+	print "\nChord is ", letter, ending, '\n\n\n\n\n'
 	return str(letter)+ending
 
 def get_chord_options(note, key):
@@ -108,7 +108,6 @@ def get_next_chord(next_note, prev_chord, key):
 		#print "probs are ", probs
 	if key[1] == 'harmonic_minor':
 		probs = matrix[num_to_rn(prev_chord_num)]
-	print "\nProbabilities: ", probs
 	options_probs = []
 	#for i in range(7):
 	for prob in probs:
