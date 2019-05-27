@@ -9,6 +9,7 @@ module.exports = async function upload(req, res) {
     const tonality = file.name.split('-')[1]
     const genre = file.name.split('-')[2]
     const rhythm = file.name.split('-')[3].toLowerCase()
+    console.log('file name is : ', file.name)
     console.log('key is ', key, ' type is ', tonality, 'genre is ', genre, 'rhythm is ', rhythm)
 
     //change filename to input.xml
