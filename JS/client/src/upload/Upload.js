@@ -108,6 +108,10 @@ class Upload extends Component {
     }
   }
 
+  componentDidMount(){
+    this.setState({genre:'Rock'})
+  }
+
   renderActions() {
     if (this.state.successfullUploaded) {
       return (
