@@ -44,11 +44,6 @@ def get_chord_in_scale(idx, key):
 def get_scale_idx(note, key):
 
 	scale = theory.Scale(key[0], key[1])
-	# print "key is ", key
-	# print "scale is ", scale
-	# print "note is ", note
-
-	# print "test is ", theory.Note(note)
 	for i in range(7):
 		print scale.__getitem__(i)
 		if scale.__getitem__(i).letter.__eq__(theory.Note(note).letter):
@@ -66,7 +61,7 @@ def build_chord(num, key):
 	if key[1] == 'harmonic_minor':
 		ending = minor_chords[num-1]
 
-	print "\n Chord is ", letter, ending
+	print "\n Chord is ", letter, ending, '\n\n\n\n\n'
 	return str(letter)+ending
 
 def get_chord_options(note, key):
@@ -95,7 +90,7 @@ def get_first_chord(first_note, key):
 
 def get_next_chord(next_note, prev_chord, key):
 
-	print '\n\n\nGETTING CHORD:\n'
+	print '\n\n\n\n\nGETTING CHORD:\n'
 	print 'next_note: ', next_note
 	print 'prev_chord: ', prev_chord
 
