@@ -91,7 +91,7 @@ def get_first_chord(first_note, key):
 def get_next_chord(next_note, prev_chord, key):
 
 	print '\n\n\n\n\nGETTING CHORD:\n'
-	print 'next_note: ', next_note
+	print 'next_note: ', next_note.letter, next_note.accidental
 	print 'prev_chord: ', prev_chord
 
 	prev_chord_num = get_scale_idx(prev_chord[0], key)
