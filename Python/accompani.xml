@@ -1,5 +1,3 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<!DOCTYPE score-partwise PUBLIC "-//Recordare//DTD MusicXML 3.1 Partwise//EN" "http://www.musicxml.org/dtds/partwise.dtd">
 <score-partwise>
   <work>
     <work-title>Test</work-title>
@@ -99,7 +97,7 @@
         <type>quarter</type>
         <stem>down</stem>
         </note>
-      <harmony><root><root-step>G</root-step></root><kind text="maj">major</kind></harmony><note default-x="94.96" default-y="-10.00">
+      <harmony><root><root-step>D</root-step></root><kind text="min">minor</kind></harmony><note default-x="94.96" default-y="-10.00">
         <pitch>
           <step>D</step>
           <octave>5</octave>
@@ -119,7 +117,7 @@
         <type>quarter</type>
         <stem>down</stem>
         </note>
-      <harmony><root><root-step>Bdi</root-step></root><kind text="min">minor</kind></harmony><note default-x="134.54" default-y="-10.00">
+      <harmony><root><root-step>B</root-step></root><kind text="dim">diminished</kind></harmony><note default-x="134.54" default-y="-10.00">
         <pitch>
           <step>D</step>
           <octave>5</octave>

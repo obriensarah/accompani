@@ -57,9 +57,6 @@ def get_scale_idx(note, key):
 
 def build_chord(num, key):
 
-	print "num is ", num
-	print "key is ", key
-
 	scale = theory.Scale(key[0], key[1])
 	letter = scale[num-1]
 
@@ -69,8 +66,6 @@ def build_chord(num, key):
 	if key[1] == 'harmonic_minor':
 		ending = minor_chords[num-1]
 
-	print "letter is ", letter
-	print "ending is ", ending
 	return str(letter)+ending
 
 def get_chord_options(note, key):
@@ -169,11 +164,11 @@ def write_chords(all_chords, path):
 				if 'M' in curr_chord:
 					mxml.add_chord(curr_chord[0:-1], 'major', measure_counter, note_index, tree)
 
-				elif 'm' in curr_chord:
-					mxml.add_chord(curr_chord[0:-1], 'minor', measure_counter, note_index, tree)
-
-				elif 'dim' in curr_chord:
+				elif curr_chord.endswith('dim'):
 					mxml.add_chord(curr_chord[0:-3], 'diminished', measure_counter, note_index, tree)
+
+				elif curr_chord.endswith('m'):
+					mxml.add_chord(curr_chord[0:-1], 'minor', measure_counter, note_index, tree)
 
 				chord_counter += 1
 		measure_counter += 1
@@ -189,5 +184,4 @@ def main():
 	write_chords(get_all_chords(mxml.get_notes(path), (key_name, key_tonality)), path)
 
 main()
-#print get_all_chords(['C','D', 'E', 'D', 'C'], ('C', 'major'))
 #write_chords(get_all_chords(mxml.get_notes('frenchsong.xml'), ('C', 'major')), 'frenchsong.xml')

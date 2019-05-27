@@ -19,6 +19,8 @@ def get_notes(path):
 
 def build_chord(name, ending):
 
+	print "name is ", name
+	print "ending is ", ending
 	harmony = ET.Element('harmony')
 	r = ET.SubElement(harmony, 'root')
 	root_step = ET.SubElement(r, 'root-step')
