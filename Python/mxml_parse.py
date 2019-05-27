@@ -28,6 +28,14 @@ def build_chord(name, ending):
 	kind = ET.SubElement(harmony, 'kind')
 	kind.set('text', ending[0:3])
 	kind.text = ending
+
+	if name.endswith('b'):
+		root_alter = ET.SubElement(r, 'root-alter')
+		root_alter.text = '-1'
+	elif name.endswith('#'):
+		root_alter = ET.SubElement(r, 'root-alter')
+		root_alter.text = '1'
+
 	# the thing inside the XML element needs to be from the list of 33 MXML kind
 
 	return harmony

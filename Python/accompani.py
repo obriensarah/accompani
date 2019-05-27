@@ -179,3 +179,7 @@ def main():
 	write_chords(get_all_chords(mxml.get_notes(path), (key_name, key_tonality)), path)
 
 main()
+# matrix = dynamicMatrix.build_matrix('Rock')
+# print get_all_chords(['F', 'D', 'Bb', 'D', 'F', 'Bb'], ('Bb', 'major'))
+
+# print get_all_chords(['C', 'D', 'E', 'D', 'C'], ('C', 'major'))
