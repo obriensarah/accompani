@@ -31,7 +31,7 @@ def format_accidental(text):
 	elif text == 'sharp':
 		return '#'
 
-print get_notes('/Users/ryanmchenry/Desktop/national_anthem.musicxml', ('Bb','major'))
+# print get_notes('/Users/ryanmchenry/Desktop/national_anthem.musicxml', ('Bb','major'))
 
 def build_chord(name, ending):
 
