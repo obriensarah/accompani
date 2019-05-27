@@ -157,6 +157,7 @@ def write_chords(all_chords, path):
 			if len(note.findall('pitch')) != 0:
 				curr_chord = all_chords[chord_counter]
 				if curr_chord == prev_chord:
+					print "\n\nREPEATED CHORD DETECTED: skipping XML write.\n\n"
 					continue
 
 				if 'M' in curr_chord:
