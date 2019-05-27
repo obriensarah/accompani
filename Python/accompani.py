@@ -162,6 +162,7 @@ def write_chords(all_chords, path):
 			curr_chord = all_chords[chord_counter]
 			if curr_chord == prev_chord:
 				chord_counter += 1
+				'REPEATED CHORD DETECTED: skipping this write'
 				continue
 
 			if 'M' in curr_chord:
@@ -187,6 +188,7 @@ def main():
 	matrix = dynamicMatrix.build_matrix(genre)
 	write_chords(get_all_chords(mxml.get_notes(path, (key_name, key_tonality)), (key_name, key_tonality)), path)
 	mxml.format_document('accompani.xml')
+	print "Accompani complete.\n\n"
 
 
 main()
