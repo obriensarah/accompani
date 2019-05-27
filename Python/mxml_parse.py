@@ -1,9 +1,11 @@
 import xml.etree.ElementTree as ET
+import musthe as theory
 
 
-def get_notes(path):
+def get_notes(path, key):
 	tree = ET.parse(path)
 	root = tree.getroot()
+	scale = theory.Scale(key[0], key[1])
 
 
 	P1 = root.find('part')
@@ -12,10 +14,24 @@ def get_notes(path):
 
 	for measure in P1:
 		for note in measure.findall('note'):
-			for pitch in note.findall('pitch'):
-				all_notes.append(pitch.find('step').text)
+			if note.find('accidental') is not None:
+				print '\n\nWARNING: sorry mate, no notes outside the key signature for now. check back soon...\n\n'
+			elif note.find('pitch') is not None:
+				for i in range(7):
+					if scale[i].letter == note.find('pitch').find('step').text:
+						all_notes.append(str(scale[i].letter) + str(scale[i].accidental))
 
 	return all_notes
+
+def format_accidental(text):
+	if text == 'natural':
+		return ''
+	elif text == 'flat':
+		return 'b'
+	elif text == 'sharp':
+		return '#'
+
+print get_notes('/Users/ryanmchenry/Desktop/national_anthem.musicxml', ('Bb','major'))
 
 def build_chord(name, ending):
 
