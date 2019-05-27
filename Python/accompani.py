@@ -147,6 +147,38 @@ def get_all_chords(notes, key):
 
 	return all_chords
 
+def write_chords_single(all_chords, path):
+	tree = ET.parse(path)
+	root = tree.getroot()
+	P1 = root.find('part')
+	prev_chord = None
+
+	chord_counter = 0
+	measure_counter = 0 #to find measure index to feed to add_chord
+	for measure in P1.findall('measure'):
+		note = measure.find('note')
+		note_index = measure.getchildren().index(note)
+		if len(note.findall('pitch')) != 0:
+			curr_chord = all_chords[chord_counter]
+			if curr_chord == prev_chord:
+				chord_counter += 1
+				measure_counter += 1
+				print 'REPEATED CHORD DETECTED: skipping this write'
+				continue
+
+			if 'M' in curr_chord:
+				mxml.add_chord(curr_chord[0:-1], 'major', measure_counter, note_index, tree)
+
+			elif curr_chord.endswith('dim'):
+				mxml.add_chord(curr_chord[0:-3], 'diminished', measure_counter, note_index, tree)
+
+			elif curr_chord.endswith('m'):
+				mxml.add_chord(curr_chord[0:-1], 'minor', measure_counter, note_index, tree)
+			
+			prev_chord = curr_chord
+			chord_counter += 1
+		measure_counter += 1
+
 def write_chords(all_chords, path):
 	tree = ET.parse(path)
 	root = tree.getroot()
@@ -183,9 +215,13 @@ def main():
 	key_name = sys.argv[2]
 	key_tonality = sys.argv[3]
 	genre = sys.argv[4]
+	rhythm = sys.argv[5]
 	global matrix
 	matrix = dynamicMatrix.build_matrix(genre)
-	write_chords(get_all_chords(mxml.get_notes(path, (key_name, key_tonality)), (key_name, key_tonality)), path)
+	if rhythm == 'single':
+		write_chords_single(get_all_chords(mxml.get_notes_single(path, (key_name, key_tonality)), (key_name, key_tonality)), path)
+	else:
+		write_chords(get_all_chords(mxml.get_notes(path, (key_name, key_tonality)), (key_name, key_tonality)), path)
 	mxml.format_document('accompani.xml')
 
 

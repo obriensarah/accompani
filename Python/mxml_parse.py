@@ -7,6 +7,27 @@ def format_document(path):
 	tree.write(path, encoding="UTF-8")
 #format_document('/Users/ryanmchenry/Downloads/accompani.xml')
 
+def get_notes_single(path, key):
+	tree = ET.parse(path)
+	root = tree.getroot()
+	scale = theory.Scale(key[0], key[1])
+
+
+	P1 = root.find('part')
+
+	all_notes = []
+
+	for measure in P1:
+		note = measure.find('note')
+		if note.find('accidental') is not None:
+			raise ValueError('\n\nWARNING: sorry mate, no notes outside the key signature for now. check back soon...\n\n')
+		elif note.find('pitch') is not None:
+			for i in range(7):
+				if scale[i].letter == note.find('pitch').find('step').text:
+					all_notes.append(str(scale[i].letter) + str(scale[i].accidental))
+
+	return all_notes
+
 def get_notes(path, key):
 	tree = ET.parse(path)
 	root = tree.getroot()
