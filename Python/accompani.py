@@ -147,6 +147,7 @@ def write_chords(all_chords, path):
 	tree = ET.parse(path)
 	root = tree.getroot()
 	P1 = root.find('part')
+	prev_chord = None
 
 	chord_counter = 0
 	measure_counter = 0 #to find measure index to feed to add_chord
@@ -155,6 +156,8 @@ def write_chords(all_chords, path):
 			note_index = measure.getchildren().index(note)
 			if len(note.findall('pitch')) != 0:
 				curr_chord = all_chords[chord_counter]
+				if curr_chord == prev_chord:
+					continue
 
 				if 'M' in curr_chord:
 					mxml.add_chord(curr_chord[0:-1], 'major', measure_counter, note_index, tree)
@@ -164,7 +167,8 @@ def write_chords(all_chords, path):
 
 				elif curr_chord.endswith('m'):
 					mxml.add_chord(curr_chord[0:-1], 'minor', measure_counter, note_index, tree)
-
+				
+				prev_chord = curr_chord
 				chord_counter += 1
 		measure_counter += 1
 
