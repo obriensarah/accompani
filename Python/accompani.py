@@ -185,8 +185,8 @@ def main():
 	genre = sys.argv[4]
 	global matrix
 	matrix = dynamicMatrix.build_matrix(genre)
-	mxml.format_document(path)
 	write_chords(get_all_chords(mxml.get_notes(path, (key_name, key_tonality)), (key_name, key_tonality)), path)
+	mxml.format_document('accompani.xml')
 
 
 main()

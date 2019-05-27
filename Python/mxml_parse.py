@@ -5,6 +5,7 @@ import musthe as theory
 def format_document(path):
 	tree = ET.parse(path)
 	tree.write(path, encoding="UTF-8")
+#format_document('/Users/ryanmchenry/Downloads/accompani.xml')
 
 def get_notes(path, key):
 	tree = ET.parse(path)
