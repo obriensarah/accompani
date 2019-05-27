@@ -157,13 +157,13 @@ def write_chords(all_chords, path):
 				curr_chord = all_chords[chord_counter]
 
 				if 'M' in curr_chord:
-					mxml.add_chord(curr_chord, 'major', measure_counter, note_index, tree)
+					mxml.add_chord(curr_chord[0:-1], 'major', measure_counter, note_index, tree)
 
 				elif curr_chord.endswith('dim'):
 					mxml.add_chord(curr_chord[0:-3], 'diminished', measure_counter, note_index, tree)
 
 				elif curr_chord.endswith('m'):
-					mxml.add_chord(curr_chord, 'minor', measure_counter, note_index, tree)
+					mxml.add_chord(curr_chord[0:-1], 'minor', measure_counter, note_index, tree)
 
 				chord_counter += 1
 		measure_counter += 1
