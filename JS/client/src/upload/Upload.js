@@ -195,7 +195,7 @@ class Upload extends Component {
           </div>
           <div style={{display:'inline-block', verticalAlign:'top', margin:'20px',width: '30%'}}>Add one chord per...
             <br/>
-            <select value={this.state.genre} onChange={(e)=>this.setState({rhythm:e.target.value})}>
+            <select value={this.state.rhythm} onChange={(e)=>this.setState({rhythm:e.target.value})}>
               <option value="Note">Note</option>
               <option value="Measure">Measure</option>
             </select>
