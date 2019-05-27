@@ -96,10 +96,6 @@ def get_next_chord(next_note, prev_chord, key):
 
 	prev_chord_num = get_scale_idx(prev_chord[0], key)
 
-	options = get_chord_options(next_note, key)
-	options = [num_to_rn(option) for option in options]
-	print "\nOptions: ", options
-
 	rand = random.seed()
 	r = random.randint(1, 100) / float(100)
 
@@ -108,6 +104,12 @@ def get_next_chord(next_note, prev_chord, key):
 		#print "probs are ", probs
 	if key[1] == 'harmonic_minor':
 		probs = matrix[num_to_rn(prev_chord_num)]
+	print "\nFull Probabilities: ", probs
+
+	options = get_chord_options(next_note, key)
+	options = [num_to_rn(option) for option in options]
+	print "\nOptions: ", options
+
 	options_probs = []
 	#for i in range(7):
 	for prob in probs:
