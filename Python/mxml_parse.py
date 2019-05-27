@@ -2,6 +2,10 @@ import xml.etree.ElementTree as ET
 import musthe as theory
 
 
+def format_document(path):
+	tree = ET.parse(path)
+	tree.write(path, encoding="UTF-8")
+
 def get_notes(path, key):
 	tree = ET.parse(path)
 	root = tree.getroot()
