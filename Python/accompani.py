@@ -51,11 +51,7 @@ def get_scale_idx(note, key):
 	raise ValueError("note ", note, " not in scale ", key)
 
 def build_chord(num, key):
-<<<<<<< HEAD
-
-=======
 	print "\n\nBUILDING CHORD: ", num, " chord in ", key
->>>>>>> d25d090ab9131d512273c65e3edda552e2672bfc
 	scale = theory.Scale(key[0], key[1])
 	letter = scale[num-1]
 
@@ -65,10 +61,7 @@ def build_chord(num, key):
 	if key[1] == 'harmonic_minor':
 		ending = minor_chords[num-1]
 
-<<<<<<< HEAD
-=======
 	print "\nChord is ", letter, ending, '\n\n\n\n\n'
->>>>>>> d25d090ab9131d512273c65e3edda552e2672bfc
 	return str(letter)+ending
 
 def get_chord_options(note, key):
@@ -186,7 +179,3 @@ def main():
 	write_chords(get_all_chords(mxml.get_notes(path), (key_name, key_tonality)), path)
 
 main()
-<<<<<<< HEAD
-#write_chords(get_all_chords(mxml.get_notes('frenchsong.xml'), ('C', 'major')), 'frenchsong.xml')
-=======
->>>>>>> d25d090ab9131d512273c65e3edda552e2672bfc
