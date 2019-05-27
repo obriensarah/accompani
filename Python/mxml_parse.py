@@ -18,7 +18,7 @@ def get_notes(path, key):
 	all_notes = []
 
 	for measure in P1:
-		for note in measure.findall('note'):
+		for note in measure.find('note'):
 			if note.find('accidental') is not None:
 				raise ValueError('\n\nWARNING: sorry mate, no notes outside the key signature for now. check back soon...\n\n')
 			elif note.find('pitch') is not None:

@@ -156,7 +156,7 @@ def write_chords(all_chords, path):
 	chord_counter = 0
 	measure_counter = 0 #to find measure index to feed to add_chord
 	for measure in P1.findall('measure'):
-		for note in measure.findall('note'):
+		for note in measure.find('note'):
 			note_index = measure.getchildren().index(note)
 			if len(note.findall('pitch')) != 0:
 				curr_chord = all_chords[chord_counter]
