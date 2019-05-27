@@ -156,6 +156,9 @@ def write_chords(all_chords, path):
 			note_index = measure.getchildren().index(note)
 			if len(note.findall('pitch')) != 0:
 				curr_chord = all_chords[chord_counter]
+				print "\n\nXML WRITER SAYS:"
+				print 'curr_chord: ', curr_chord
+				print 'prev_chord: ', prev_chord
 				if curr_chord == prev_chord:
 					print "\n\nREPEATED CHORD DETECTED: skipping XML write.\n\n"
 					continue
