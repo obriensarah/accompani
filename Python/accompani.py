@@ -160,9 +160,9 @@ def write_chords(all_chords, path):
 		note_index = measure.getchildren().index(note)
 		if len(note.findall('pitch')) != 0:
 			curr_chord = all_chords[chord_counter]
-			if curr_chord == prev_chord:
-				chord_counter += 1
-				continue
+			# if curr_chord == prev_chord:
+			# 	chord_counter += 1
+			# 	continue
 
 			if 'M' in curr_chord:
 				mxml.add_chord(curr_chord[0:-1], 'major', measure_counter, note_index, tree)
