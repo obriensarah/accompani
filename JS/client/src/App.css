@@ -100,7 +100,7 @@ input{
   border-radius: 20px;
   box-shadow: 3px 3px 20px -2px #222;
   transition: all .5s ease;
-
+  cursor: pointer;
 }
 
 .card:hover{

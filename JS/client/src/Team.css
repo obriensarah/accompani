@@ -1,24 +1,26 @@
 .container{
   margin: 20px;
   height: 230px;
-  width: 200px;
+  width: 250px;
   overflow: hidden;
   position: relative;
   display: inline-block;
   transition: all .5s;
   vertical-align: middle;
+  text-align: center;
 }
 
 .container:hover{
-  background: transparent;
+  background-image: transparent;
   transform: scale(1.1);
-  height: 320px;
+  height: 340px;
   margin: 0px 40px;
 }
 
 .colorbg{
   height: 200px;
   width: 200px;
+  margin: auto;
   border-radius: 50%;
   background: #B80F42;
   z-index: 990;
