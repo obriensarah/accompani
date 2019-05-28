@@ -8,9 +8,17 @@ module.exports = async function upload(req, res) {
     let complete = false
     let errors = false
 
-    if (fs.exists('accompani.xml')){
-      fs.unlinkSync('accompani.xml'); //delete old solution files
-    }
+    fs.unlink('./accompani.xml', function(err) {
+      if(err && err.code == 'ENOENT') {
+          // file doens't exist
+          console.info("File doesn't exist, won't remove it.");
+      } else if (err) {
+          // other errors, e.g. maybe we don't have enough permission
+          console.error("Error occurred while trying to remove file");
+      } else {
+          console.info(`removed`);
+      }
+    });
 
     const key = file.name.split('-')[0]
     const tonality = file.name.split('-')[1]
@@ -32,9 +40,17 @@ module.exports = async function upload(req, res) {
     });
 
     child.stderr.on('data', (data) => {
-      if (fs.exists('./accompani.xml')){
-        fs.unlinkSync('./accompani.xml'); //delete old solution files
-      }
+      fs.unlink('./accompani.xml', function(err) {
+        if(err && err.code == 'ENOENT') {
+            // file doens't exist
+            console.info("File doesn't exist, won't remove it.");
+        } else if (err) {
+            // other errors, e.g. maybe we don't have enough permission
+            console.error("Error occurred while trying to remove file");
+        } else {
+            console.info(`removed`);
+        }
+      });
       console.error(`child stderr:\n${data}`);
     });
 
