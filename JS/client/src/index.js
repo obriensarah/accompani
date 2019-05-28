@@ -4,7 +4,7 @@ import './index.css';
 import App from './App';
 import Team from './Team';
 import About from './About';
-import { BrowserRouter, Route } from 'react-router-dom'
+import { HashRouter, Route } from 'react-router-dom'
 
 class Routes extends React.Component {
   render() {
@@ -19,8 +19,8 @@ class Routes extends React.Component {
 }
 
 ReactDOM.render(
-  <BrowserRouter>
+  <HashRouter>
     <Routes />
-  </BrowserRouter>,
+  </HashRouter>,
   document.getElementById("root")
 );
