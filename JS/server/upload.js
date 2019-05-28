@@ -14,6 +14,7 @@ module.exports = async function upload(req, res) {
 
     const key = file.name.split('-')[0]
     const tonality = file.name.split('-')[1]
+    if (tonality === 'minor'){tonality = 'harmonic_minor'}
     const genre = file.name.split('-')[2]
     const rhythm = file.name.split('-')[3].toLowerCase()
     console.log('file name is : ', file.name)
