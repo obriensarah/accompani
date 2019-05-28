@@ -51,7 +51,7 @@ def get_scale_idx(note, key):
 	raise ValueError("note ", note, " not in scale ", key)
 
 def build_chord(num, key):
-	print "\n\nBUILDING CHORD: ", num, " chord in ", key
+	# print "\n\nBUILDING CHORD: ", num, " chord in ", key
 	scale = theory.Scale(key[0], key[1])
 	letter = scale[num-1]
 
@@ -61,7 +61,7 @@ def build_chord(num, key):
 	if key[1] == 'harmonic_minor':
 		ending = minor_chords[num-1]
 
-	print "\nChord is ", letter, ending, '\n\n\n\n\n'
+	# print "\nChord is ", letter, ending, '\n\n'
 	return str(letter)+ending
 
 def get_chord_options(note, key):
@@ -90,15 +90,11 @@ def get_first_chord(first_note, key):
 
 def get_next_chord(next_note, prev_chord, key):
 
-	print '\n\n\n\n\nGETTING CHORD:\n'
-	print 'next_note: ', next_note
-	print 'prev_chord: ', prev_chord
+	# print '\n\nGETTING CHORD:\n'
+	# print 'next_note: ', next_note
+	# print 'prev_chord: ', prev_chord
 
 	prev_chord_num = get_scale_idx(prev_chord[0], key)
-
-	options = get_chord_options(next_note, key)
-	options = [num_to_rn(option) for option in options]
-	print "\nOptions: ", options
 
 	rand = random.seed()
 	r = random.randint(1, 100) / float(100)
@@ -108,16 +104,24 @@ def get_next_chord(next_note, prev_chord, key):
 		#print "probs are ", probs
 	if key[1] == 'harmonic_minor':
 		probs = matrix[num_to_rn(prev_chord_num)]
+	# print "\nFull Probabilities: ", probs
+
+	options = get_chord_options(next_note, key)
+	options = [num_to_rn(option) for option in options]
+	# print "\nOptions: ", options
+
 	options_probs = []
-	#for i in range(7):
-	for prob in probs:
-		if prob in options:
-			options_probs.append(probs[prob])
+	# for prob in probs:
+	# 	if prob in options:
+	# 		options_probs.append(probs[prob])
+
+	for prob in options:
+		options_probs.append(probs[prob])
 
 	s = sum(options_probs)
 	normalized = [prob/s for prob in options_probs]
 
-	print "\nNormalized Probabilities: ", normalized
+	# print "\nNormalized Probabilities: ", normalized
 
 	total = 0
 	index = -1
@@ -144,10 +148,43 @@ def get_all_chords(notes, key):
 
 	return all_chords
 
+def write_chords_single(all_chords, path):
+	tree = ET.parse(path)
+	root = tree.getroot()
+	P1 = root.find('part')
+	prev_chord = None
+
+	chord_counter = 0
+	measure_counter = 0 #to find measure index to feed to add_chord
+	for measure in P1.findall('measure'):
+		note = measure.find('note')
+		note_index = measure.getchildren().index(note)
+		if len(note.findall('pitch')) != 0:
+			curr_chord = all_chords[chord_counter]
+			if curr_chord == prev_chord:
+				chord_counter += 1
+				measure_counter += 1
+				print 'REPEATED CHORD DETECTED: skipping this write'
+				continue
+
+			if 'M' in curr_chord:
+				mxml.add_chord(curr_chord[0:-1], 'major', measure_counter, note_index, tree)
+
+			elif curr_chord.endswith('dim'):
+				mxml.add_chord(curr_chord[0:-3], 'diminished', measure_counter, note_index, tree)
+
+			elif curr_chord.endswith('m'):
+				mxml.add_chord(curr_chord[0:-1], 'minor', measure_counter, note_index, tree)
+			
+			prev_chord = curr_chord
+			chord_counter += 1
+		measure_counter += 1
+
 def write_chords(all_chords, path):
 	tree = ET.parse(path)
 	root = tree.getroot()
 	P1 = root.find('part')
+	prev_chord = None
 
 	chord_counter = 0
 	measure_counter = 0 #to find measure index to feed to add_chord
@@ -156,6 +193,9 @@ def write_chords(all_chords, path):
 			note_index = measure.getchildren().index(note)
 			if len(note.findall('pitch')) != 0:
 				curr_chord = all_chords[chord_counter]
+				if curr_chord == prev_chord:
+					chord_counter += 1
+					continue
 
 				if 'M' in curr_chord:
 					mxml.add_chord(curr_chord[0:-1], 'major', measure_counter, note_index, tree)
@@ -165,7 +205,8 @@ def write_chords(all_chords, path):
 
 				elif curr_chord.endswith('m'):
 					mxml.add_chord(curr_chord[0:-1], 'minor', measure_counter, note_index, tree)
-
+				
+				prev_chord = curr_chord
 				chord_counter += 1
 		measure_counter += 1
 
@@ -175,12 +216,23 @@ def main():
 	key_name = sys.argv[2]
 	key_tonality = sys.argv[3]
 	genre = sys.argv[4]
+	rhythm = sys.argv[5]
 	global matrix
+<<<<<<< HEAD
 	if key_tonality == 'major':
 		matrix = dynamicMatrix.build_major_matrix(genre)
 	elif key_tonality == 'harmonic_minor':
 		matrix = dynamicMatrix.build_minor_matrix(genre)
 	write_chords(get_all_chords(mxml.get_notes(path), (key_name, key_tonality)), path)
+=======
+	matrix = dynamicMatrix.build_matrix(genre)
+	if rhythm == 'measure':
+		write_chords_single(get_all_chords(mxml.get_notes_single(path, (key_name, key_tonality)), (key_name, key_tonality)), path)
+	else:
+		write_chords(get_all_chords(mxml.get_notes(path, (key_name, key_tonality)), (key_name, key_tonality)), path)
+	mxml.format_document('accompani.xml')
+
+>>>>>>> 4665728fcbb4b3e3bdb11dd05f6f8b8ee8151d09
 
 main()
 # matrix = dynamicMatrix.build_matrix('Rock')

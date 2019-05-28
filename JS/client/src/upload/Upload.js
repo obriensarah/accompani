@@ -12,7 +12,9 @@ class Upload extends Component {
       uploadProgress: {},
       successfullUploaded: false,
       tonality:'',
-      genre:'Rock'
+      genre:'Rock',
+      rhythm:'',
+      renderStyleInfo: false
     };
 
     this.onFilesAdded = this.onFilesAdded.bind(this);
@@ -78,7 +80,7 @@ class Upload extends Component {
       });
 
       const formData = new FormData();
-      let filename = this.state.key + '-' + this.state.tonality + '-' + this.state.genre
+      let filename = this.state.key + '-' + this.state.tonality + '-' + this.state.genre + '-' + this.state.rhythm
       formData.append("file", file, filename);
 
       req.open("POST", "http://35.174.137.122:8000/upload");
@@ -106,6 +108,10 @@ class Upload extends Component {
         </div>
       );
     }
+  }
+
+  componentDidMount(){
+    this.setState({genre:'Rock', rhythm:'Note'})
   }
 
   renderActions() {
@@ -149,6 +155,39 @@ class Upload extends Component {
     return 'button buttonSmall buttonUnselected'
   }
 
+  rhythmButtonStyle(rhythm){
+    if (this.state.rhythm === rhythm.toLowerCase()){
+      return 'button buttonSmall buttonSelected'
+    }
+    return 'button buttonSmall buttonUnselected'
+  }
+
+  renderStyleInfo(){
+    if (this.state.renderStyleInfo){
+      return(
+      <div>
+        <div style={{fontSize:'.6em', color: '#999',width: '110%', margin:'5px 0px'}}>
+          Accompani uses a machine learning model to automatically build chord progressions. By selecting a genre, you decide what music trains the model, and what musicians content is considered in building each progression.
+        </div>
+      </div>
+      )
+    }
+    return null
+  }
+
+  renderRhythmInfo(){
+    if (this.state.renderRhythmInfo){
+      return(
+      <div>
+        <div style={{fontSize:'.6em', color: '#999',width: '110%', margin:'5px 0px'}}>
+          Accompani analyzes individual notes and measures to determine a chord progression. By choosing your rhythm preference, you decide how often accompani chooses to change chords - on each new measure, or each new note.
+        </div>
+      </div>
+      )
+    }
+    return null
+  }
+
   renderPiano(){
     if (this.state.files.length > 0){
       return(
@@ -173,12 +212,23 @@ class Upload extends Component {
           <button className={this.tonalityButtonStyle('Major')} onClick={()=>this.setState({tonality:'major'})}>Major</button>
           <button className={this.tonalityButtonStyle('Minor')} onClick={()=>this.setState({tonality:'minor'})}>Minor</button>
           <br/>
-          <div style={{display:'inline-block', verticalAlign:'top', margin:'20px',width: '40%'}}>Select a musical style...
+          <div style={{display:'inline-block', verticalAlign:'top', margin:'20px',width: '40%'}}>Select musical style...&nbsp;
+            <img style={{height:'15px', opacity:'.4', cursor:'pointer', display:'inline-block'}} src='/info.png' alt='info' onClick={()=>this.setState({renderStyleInfo:!this.state.renderStyleInfo})} />
             <br/>
+            {this.renderStyleInfo()}
             <select value={this.state.genre} onChange={(e)=>this.setState({genre:e.target.value})}>
               <option value="Rock">Rock</option>
               <option value="Pop">Pop</option>
               <option value="Folk">Folk</option>
+            </select>
+          </div>
+          <div style={{display:'inline-block', verticalAlign:'top', margin:'20px',width: '40%'}}>Select harmonic rhythm...&nbsp;
+            <img style={{height:'15px', opacity:'.4', cursor:'pointer', display:'inline-block'}} src='/info.png' alt='info' onClick={()=>this.setState({renderRhythmInfo:!this.state.renderRhythmInfo})} />
+            <br/>
+            {this.renderRhythmInfo()}
+            <select value={this.state.rhythm} onChange={(e)=>this.setState({rhythm:e.target.value})}>
+              <option value="Note">Note</option>
+              <option value="Measure">Measure</option>
             </select>
           </div>
       </div>

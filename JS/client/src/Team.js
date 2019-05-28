@@ -34,7 +34,6 @@ class Team extends Component {
   }
 
   render() {
-    console.log(this.state.file)
     return (
       <div className="App">
         <header className="App-header">
@@ -42,18 +41,23 @@ class Team extends Component {
           <video src='/wave.mov' autoPlay loop className="App-logo" alt="logo"/>
           <div className='title'>
             <span className='titleBlue'>&lt;</span>
-            &nbsp;team&nbsp;
+            &nbsp;developers&nbsp;
             <span className='titleBlue'> &#47;&gt;</span>
           </div>
-
+          
           <div className='cardContainer'>
+
             <div className='container'>
               <div className='colorbg'>
-                <img className='profimg' src='/sarah.png' alt='' />
+                <a href='https://www.linkedin.com/in/sarah-bridget-obrien/' target='_blank' rel="noopener noreferrer">
+                  <img className='profimg' src='/sarah.png' alt='' />
+                </a>
               </div>
               <div className='name'>Sarah O'Brien</div>
               <div className='description'>
-                she does math good and also plays the music #jinglebells
+                Northwestern University <br/>
+                Weinberg College of Arts and Sciences <br/>
+                Computer Science<br/>Class of 2020
                 <br/>
                 <a href="mailto:sarahobrien2020@u.northwestern.edu">
                   Email Sarah
@@ -62,11 +66,16 @@ class Team extends Component {
             </div>
             <div className='container'>
               <div className='colorbg'>
-                <img className='profimg' src='/ryan.jpg' alt='' />
+                <a href='https://www.linkedin.com/in/ryanmchenry2/' target='_blank' rel="noopener noreferrer">
+                  <img className='profimg' src='/ryan.jpg' alt='' />
+                </a>
               </div>
               <div className='name'>Ryan McHenry</div>
               <div className='description'>
-                he makes things pretty and colorful and writes the no fun code!
+                Northwestern University <br/>
+                Bienen School of Music <br/>
+                Computer Science and Music Engineering <br/>
+                Class of 2019
                 <br/>
                 <a href="mailto:ryanmchenry2019@u.northwestern.edu">
                   Email Ryan
@@ -74,6 +83,8 @@ class Team extends Component {
               </div>
             </div>
           </div>
+          <br/><br/>
+          <div className='title' style={{fontSize:'.6em', fontWeight:'100', opacity:'.5', letterSpacing:'1px'}}>designed @ Northwestern University's Interactive Audio Lab<br/>under the guidance of <a style={{color:'lightblue'}} href='http://users.cs.northwestern.edu/~pardo/'  target='_blank' rel="noopener noreferrer">Prof. Bryan Pardo</a></div>
         </header>
       </div>
     );

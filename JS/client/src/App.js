@@ -3,6 +3,7 @@ import './App.css';
 import Upload from './upload/Upload';
 import Nav from './Nav'
 import Loading from './Loading'
+import { Link } from 'react-router-dom'
 
 class App extends Component {
 
@@ -67,8 +68,11 @@ class App extends Component {
               <span className='titleBlue'> &#47;&gt;</span>
             </div>
 
+            <div className='title' style={{fontSize:'.8em', fontWeight:'200', opacity:'.5', letterSpacing:'1px'}}>an automated lead sheet generator<br/>powered by live input, real artists, and machine learning.</div>
+
             <div className='cardContainer'>
-              <div className='card'>
+              
+              <div className='card' onClick={()=>this.setState({upload:true})}>
                 <div className='cardHeader'>YOU GIVE US:</div>
                 <div className='cardBody'>
                   Input MusicXML file<br/>
@@ -76,15 +80,16 @@ class App extends Component {
                   Stylistic Preferences
                 </div>
               </div>
-
-              <div className='card'>
-                <div className='cardHeader'>WE GIVE YOU:</div>
-                <div className='cardBody'>
-                  Output MusicXML file<br/>
-                  Chord Progression<br/>
-                  Lead Sheet
+              <Link to='/about'>
+                <div className='card'>
+                  <div className='cardHeader'>WE GIVE YOU:</div>
+                  <div className='cardBody'>
+                    Output MusicXML file<br/>
+                    Chord Progression<br/>
+                    Lead Sheet
+                  </div>
                 </div>
-              </div>
+              </Link>
               <br/>
 
               <br/>

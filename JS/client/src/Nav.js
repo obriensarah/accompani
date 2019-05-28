@@ -15,7 +15,7 @@ class Nav extends Component {
     return (
       <div className='containter'>
         <Link to='/'><div className={this.selectClass('home')}>home</div></Link>
-        <Link to='/team'><div className={this.selectClass('team')}>team</div></Link>
+        <Link to='/team'><div className={this.selectClass('team')}>developers</div></Link>
         <Link to='/about'><div className={this.selectClass('about')}>about</div></Link>
       </div>
     );

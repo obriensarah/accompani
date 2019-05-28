@@ -1,9 +1,37 @@
 import xml.etree.ElementTree as ET
+import musthe as theory
 
 
-def get_notes(path):
+def format_document(path):
+	tree = ET.parse(path)
+	tree.write(path, encoding="UTF-8")
+#format_document('/Users/ryanmchenry/Downloads/accompani.xml')
+
+def get_notes_single(path, key):
 	tree = ET.parse(path)
 	root = tree.getroot()
+	scale = theory.Scale(key[0], key[1])
+
+
+	P1 = root.find('part')
+
+	all_notes = []
+
+	for measure in P1:
+		note = measure.find('note')
+		if note.find('accidental') is not None:
+			raise ValueError('\n\nWARNING: sorry mate, no notes outside the key signature for now. check back soon...\n\n')
+		elif note.find('pitch') is not None:
+			for i in range(7):
+				if scale[i].letter == note.find('pitch').find('step').text:
+					all_notes.append(str(scale[i].letter) + str(scale[i].accidental))
+
+	return all_notes
+
+def get_notes(path, key):
+	tree = ET.parse(path)
+	root = tree.getroot()
+	scale = theory.Scale(key[0], key[1])
 
 
 	P1 = root.find('part')
@@ -12,15 +40,27 @@ def get_notes(path):
 
 	for measure in P1:
 		for note in measure.findall('note'):
-			for pitch in note.findall('pitch'):
-				all_notes.append(pitch.find('step').text)
+			if note.find('accidental') is not None:
+				raise ValueError('\n\nWARNING: sorry mate, no notes outside the key signature for now. check back soon...\n\n')
+			elif note.find('pitch') is not None:
+				for i in range(7):
+					if scale[i].letter == note.find('pitch').find('step').text:
+						all_notes.append(str(scale[i].letter) + str(scale[i].accidental))
 
 	return all_notes
 
+def format_accidental(text):
+	if text == 'natural':
+		return ''
+	elif text == 'flat':
+		return 'b'
+	elif text == 'sharp':
+		return '#'
+
+# print get_notes('/Users/ryanmchenry/Desktop/national_anthem.musicxml', ('Bb','major'))
+
 def build_chord(name, ending):
 
-	print "name is ", name
-	print "ending is ", ending
 	harmony = ET.Element('harmony')
 	r = ET.SubElement(harmony, 'root')
 	root_step = ET.SubElement(r, 'root-step')
@@ -32,9 +72,11 @@ def build_chord(name, ending):
 	if name.endswith('b'):
 		root_alter = ET.SubElement(r, 'root-alter')
 		root_alter.text = '-1'
+		root_step.text = root_step.text[0:-1]
 	elif name.endswith('#'):
 		root_alter = ET.SubElement(r, 'root-alter')
 		root_alter.text = '1'
+		root_step.text = root_step.text[0:-1]
 
 	# the thing inside the XML element needs to be from the list of 33 MXML kind
 
