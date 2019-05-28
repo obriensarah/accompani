@@ -61,7 +61,7 @@ def build_chord(num, key):
 	if key[1] == 'harmonic_minor':
 		ending = minor_chords[num-1]
 
-	print "\nChord is ", letter, ending, '\n\n\n\n\n'
+	print "\nChord is ", letter, ending, '\n\n'
 	return str(letter)+ending
 
 def get_chord_options(note, key):
@@ -90,7 +90,7 @@ def get_first_chord(first_note, key):
 
 def get_next_chord(next_note, prev_chord, key):
 
-	print '\n\n\n\n\nGETTING CHORD:\n'
+	print '\n\nGETTING CHORD:\n'
 	print 'next_note: ', next_note
 	print 'prev_chord: ', prev_chord
 
@@ -104,7 +104,7 @@ def get_next_chord(next_note, prev_chord, key):
 		#print "probs are ", probs
 	if key[1] == 'harmonic_minor':
 		probs = matrix[num_to_rn(prev_chord_num)]
-	print "\nFull Probabilities: ", probs
+	# print "\nFull Probabilities: ", probs
 
 	options = get_chord_options(next_note, key)
 	options = [num_to_rn(option) for option in options]
