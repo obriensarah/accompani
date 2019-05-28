@@ -167,7 +167,7 @@ class Upload extends Component {
       return(
       <div>
         <div style={{fontSize:'.6em', color: '#999',width: '110%', margin:'5px 0px'}}>
-          Accompani uses a machine learning model to automatically build chord progressions. By selecting a genre, you decide what music trains the model, and what musicians content is considered in building each progression.
+          Accompani uses a machine learning model to automatically build chord progressions. By selecting a genre, you decide what music trains the model, and what musicians content is considered in building each progression. For example, "Rock" includes music from Aerosmith, Creedence Clearwater, Dire Straits, Eagles, Elvis Presley, and more.
         </div>
       </div>
       )
