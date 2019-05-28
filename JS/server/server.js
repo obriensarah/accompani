@@ -19,7 +19,7 @@ server.get('/download', function(req, res){
 });
 
 server.get('/sampledownload', function(req, res){
-  var file = 'national_anthem_Bb_major.xml'
+  var file = 'server/national_anthem_Bb_major.xml'
   res.download(file); // Set disposition and send it.
 });
 
