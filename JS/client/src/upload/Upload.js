@@ -43,7 +43,7 @@ class Upload extends Component {
       await Promise.all(promises);
 
       this.setState({ successfullUploaded: true, uploading: false });
-      window.setTimeout(()=>{this.props.closeUpload()},2000)
+      window.setTimeout(()=>{this.props.closeUpload()},500)
     } catch (e) {
       // Not Production ready! Do some error handling here instead...
       this.setState({ successfullUploaded: true, uploading: false });
@@ -192,7 +192,7 @@ class Upload extends Component {
     if (this.state.files.length > 0){
       return(
         <div style={{textAlign:'center'}}>
-          <div>Select a key signature...&nbsp;<b style={{color: '#B80F42', fontSize:'1.2em'}}>{this.state.key}</b></div>
+          <div>Select a key signature...&nbsp;<b style={{color: '#B80F42', fontSize:'1.2em', background:'transparent'}}>{this.state.key}</b></div>
           <div className='pianoContainer'>
             <div className={this.keyStyle('C')} onClick={()=>this.selectKey('C')}>C</div>
             <div className={this.keyStyle('D')} onClick={()=>this.selectKey('D')}>D</div>

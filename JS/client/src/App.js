@@ -46,7 +46,7 @@ class App extends Component {
       else{
        this.setState({complete_with_error:true,loading:false})
       }
-    },4000)
+    },2000)
   }
 
   renderSampleMidiBox(){
@@ -67,13 +67,12 @@ class App extends Component {
     http.open('HEAD', 'http://35.174.137.122:8000/download', false);
     http.send();
 
-    return http.status != 404;
+    return http.status !== 404;
 
 }
 
   render() {
-    console.log("SOLUTION READY: ", this.fileExists())
-    if (!this.state.loading && !this.state.complete){
+    if (!this.state.loading && !this.state.complete && !this.state.complete_with_error){
       return (
         <div className="App">
           <header className="App-header">
@@ -178,7 +177,7 @@ class App extends Component {
             <div className='title' style={{fontSize:'.8em', fontWeight:'100', color:'#bbb', letterSpacing:'1px'}}>This is often caused by a bad XML file, or perhaps a melody that contains notes outside its key signature. Check your input file and try again.</div>
 
             <div className='cardContainer'>
-              <button className='buttonSecondary' onClick={()=>this.setState({loading:false,complete:false})}>TRY AGAIN</button>
+                <button className='buttonSecondary' onClick={()=>this.setState({complete_with_error:false})}>TRY AGAIN</button>
             </div>
 
           </header>
