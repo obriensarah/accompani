@@ -218,21 +218,20 @@ def main():
 	genre = sys.argv[4]
 	rhythm = sys.argv[5]
 	global matrix
-<<<<<<< HEAD
+
+	#build matrix based on tonality
 	if key_tonality == 'major':
 		matrix = dynamicMatrix.build_major_matrix(genre)
 	elif key_tonality == 'harmonic_minor':
 		matrix = dynamicMatrix.build_minor_matrix(genre)
 	write_chords(get_all_chords(mxml.get_notes(path), (key_name, key_tonality)), path)
-=======
-	matrix = dynamicMatrix.build_matrix(genre)
+
+	#build accompani based on rhythm input
 	if rhythm == 'measure':
 		write_chords_single(get_all_chords(mxml.get_notes_single(path, (key_name, key_tonality)), (key_name, key_tonality)), path)
 	else:
 		write_chords(get_all_chords(mxml.get_notes(path, (key_name, key_tonality)), (key_name, key_tonality)), path)
 	mxml.format_document('accompani.xml')
-
->>>>>>> 4665728fcbb4b3e3bdb11dd05f6f8b8ee8151d09
 
 main()
 # matrix = dynamicMatrix.build_matrix('Rock')
