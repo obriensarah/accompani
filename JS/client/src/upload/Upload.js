@@ -30,7 +30,7 @@ class Upload extends Component {
   }
 
   async uploadFiles() {
-    if (!this.state.key){
+    if (!this.state.key || !this.state.tonality){
       alert('Whoops! Make sure to select a key!')
       return
     }

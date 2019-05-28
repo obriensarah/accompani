@@ -5,6 +5,13 @@ module.exports = async function upload(req, res) {
   var form = new IncomingForm();
 
   form.on("file", async (field, file) => {
+    let complete = false
+    let errors = false
+
+    if (fs.exists('accompani.xml')){
+      fs.unlinkSync('accompani.xml'); //delete old solution files
+    }
+
     const key = file.name.split('-')[0]
     const tonality = file.name.split('-')[1]
     const genre = file.name.split('-')[2]

@@ -54,7 +54,19 @@ class App extends Component {
     )
   }
 
+  fileExists(){
+
+    var http = new XMLHttpRequest();
+
+    http.open('HEAD', 'http://35.174.137.122:8000/download', false);
+    http.send();
+
+    return http.status != 404;
+
+}
+
   render() {
+    console.log("SOLUTION READY: ", this.fileExists())
     if (!this.state.loading && !this.state.complete){
       return (
         <div className="App">
@@ -68,7 +80,7 @@ class App extends Component {
               <span className='titleBlue'> &#47;&gt;</span>
             </div>
 
-            <div className='title' style={{fontSize:'.8em', fontWeight:'200', opacity:'.5', letterSpacing:'1px'}}>an automated lead sheet generator<br/>powered by live input, real artists, and machine learning.</div>
+            <div className='title' style={{fontSize:'.8em', fontWeight:'100', color:'#bbb', letterSpacing:'1px'}}>an automated lead sheet generator<br/>powered by live input, real artists, and machine learning.</div>
 
             <div className='cardContainer'>
               
