@@ -20,7 +20,7 @@ def transposeChords(filepath):
 		chords[i] = chords[i].split(']')[0].split('/')[0]
 		chords[i] = chords[i].capitalize()
 
-	key = keyDetection.detectKey(filepath)
+	#key = keyDetection.detectKey(filepath)
 
 	if 'm' in key:
 		key = key[0:-1]

@@ -136,6 +136,7 @@ def get_all_chords(notes, key):
 	all_chords = [first_chord]
 
 	prev_chord = first_chord
+	print "notes are ", notes
 	for note in notes[1:]:
 		next_chord = get_next_chord(note, prev_chord, key)
 		all_chords.append(next_chord)
@@ -175,7 +176,10 @@ def main():
 	key_tonality = sys.argv[3]
 	genre = sys.argv[4]
 	global matrix
-	matrix = dynamicMatrix.build_matrix(genre)
+	if key_tonality == 'major':
+		matrix = dynamicMatrix.build_major_matrix(genre)
+	elif key_tonality == 'harmonic_minor':
+		matrix = dynamicMatrix.build_minor_matrix(genre)
 	write_chords(get_all_chords(mxml.get_notes(path), (key_name, key_tonality)), path)
 
 main()
