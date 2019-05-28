@@ -56,6 +56,12 @@ def build_minor_matrix(genre):
 				if 'm' in key:
 					minor_matrix = probMatrix.fill_matrix(rna.c_to_rn(probMatrix.transposeChords(os.path.join('../training_data/genres', genre, dirname, filename))))
 	# print probMatrix.normalize(probabilities)
+
+	for key in minor_matrix:
+		for rn in ['i', 'ii', 'iii', 'iv', 'v', 'vi', 'vii']:
+			if rn not in minor_matrix[key]:
+				minor_matrix[key][rn] = 0
+
 	normalbois = probMatrix.normalize(minor_matrix)
 
 	for bigboi in normalbois:

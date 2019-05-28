@@ -119,6 +119,8 @@ def get_next_chord(next_note, prev_chord, key):
 		options_probs.append(probs[prob])
 
 	s = sum(options_probs)
+	if s == 0:
+		return build_chord(1, key) #use 1 chord if in doubt
 	normalized = [prob/s for prob in options_probs]
 
 	# print "\nNormalized Probabilities: ", normalized
