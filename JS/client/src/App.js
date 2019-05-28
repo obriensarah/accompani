@@ -12,7 +12,8 @@ class App extends Component {
     this.state = {
       upload:false,
       loading:false,
-      complete:false
+      complete:false,
+      complete_with_error:false
     }
   }
 
@@ -39,7 +40,12 @@ class App extends Component {
 
   waitForComplete(){
     window.setTimeout(()=>{
-      this.setState({complete:true,loading:false})
+      if (this.fileExists()){
+        this.setState({complete:true,loading:false})
+      }
+      else{
+       this.setState({complete_with_error:true,loading:false})
+      }
     },4000)
   }
 
@@ -151,6 +157,28 @@ class App extends Component {
               </a>
               <br/>
               <button className='buttonSecondary' onClick={()=>this.setState({loading:false,complete:false})}>START OVER</button>
+            </div>
+
+          </header>
+        </div>
+      );
+    }
+
+    if (this.state.complete_with_error){
+      return (
+        <div className="App">
+          <header className="App-header">
+            <Nav current='home'/>
+            <video src='/wave.mov' autoPlay loop className="App-logo" alt="logo"/>
+            <div className='title'>
+              <span className='titleBlue'>&lt;</span>
+              &nbsp;error&nbsp;
+              <span className='titleBlue'> &#47;&gt;</span>
+            </div>
+            <div className='title' style={{fontSize:'.8em', fontWeight:'100', color:'#bbb', letterSpacing:'1px'}}>This is often caused by a bad XML file, or perhaps a melody that contains notes outside its key signature. Check your input file and try again.</div>
+
+            <div className='cardContainer'>
+              <button className='buttonSecondary' onClick={()=>this.setState({loading:false,complete:false})}>TRY AGAIN</button>
             </div>
 
           </header>

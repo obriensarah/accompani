@@ -31,6 +31,7 @@ module.exports = async function upload(req, res) {
     });
 
     child.stderr.on('data', (data) => {
+      fs.unlinkSync('accompani.xml'); //delete bad solution files
       console.error(`child stderr:\n${data}`);
     });
 
