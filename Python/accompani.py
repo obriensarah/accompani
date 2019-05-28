@@ -51,7 +51,7 @@ def get_scale_idx(note, key):
 	raise ValueError("note ", note, " not in scale ", key)
 
 def build_chord(num, key):
-	print "\n\nBUILDING CHORD: ", num, " chord in ", key
+	# print "\n\nBUILDING CHORD: ", num, " chord in ", key
 	scale = theory.Scale(key[0], key[1])
 	letter = scale[num-1]
 
@@ -61,7 +61,7 @@ def build_chord(num, key):
 	if key[1] == 'harmonic_minor':
 		ending = minor_chords[num-1]
 
-	print "\nChord is ", letter, ending, '\n\n'
+	# print "\nChord is ", letter, ending, '\n\n'
 	return str(letter)+ending
 
 def get_chord_options(note, key):
@@ -90,9 +90,9 @@ def get_first_chord(first_note, key):
 
 def get_next_chord(next_note, prev_chord, key):
 
-	print '\n\nGETTING CHORD:\n'
-	print 'next_note: ', next_note
-	print 'prev_chord: ', prev_chord
+	# print '\n\nGETTING CHORD:\n'
+	# print 'next_note: ', next_note
+	# print 'prev_chord: ', prev_chord
 
 	prev_chord_num = get_scale_idx(prev_chord[0], key)
 
@@ -108,7 +108,7 @@ def get_next_chord(next_note, prev_chord, key):
 
 	options = get_chord_options(next_note, key)
 	options = [num_to_rn(option) for option in options]
-	print "\nOptions: ", options
+	# print "\nOptions: ", options
 
 	options_probs = []
 	# for prob in probs:
@@ -121,7 +121,7 @@ def get_next_chord(next_note, prev_chord, key):
 	s = sum(options_probs)
 	normalized = [prob/s for prob in options_probs]
 
-	print "\nNormalized Probabilities: ", normalized
+	# print "\nNormalized Probabilities: ", normalized
 
 	total = 0
 	index = -1
