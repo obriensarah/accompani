@@ -224,7 +224,7 @@ def main():
 		matrix = dynamicMatrix.build_major_matrix(genre)
 	elif key_tonality == 'harmonic_minor':
 		matrix = dynamicMatrix.build_minor_matrix(genre)
-	write_chords(get_all_chords(mxml.get_notes(path), (key_name, key_tonality)), path)
+	# write_chords(get_all_chords(mxml.get_notes(path), (key_name, key_tonality)), path)
 
 	#build accompani based on rhythm input
 	if rhythm == 'measure':
